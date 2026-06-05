@@ -8,6 +8,7 @@ import { AboutPage } from './pages/AboutPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { ReferencesPage } from './pages/ReferencesPage';
 import { EvaluatorPage } from './pages/EvaluatorPage';
+import { ToolsPage } from './pages/ToolsPage';
 import './styles/main.scss';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -21,9 +22,23 @@ const TWEAK_DEFAULTS = {
 };
 
 function readRoute() {
-  const p = location.pathname.replace(/^\//, '').trim();
+  const p = location.pathname.replace(/^\//, '').replace(/\/$/, '').trim();
   if (!p || p === '/') return 'hub';
-  if (['checklist', 'contraste', 'simulador', 'sobre', 'privacidade', 'hub', 'referencias', 'avaliador'].includes(p)) return p;
+  if (['ferramentas', 'sobre', 'privacidade', 'hub', 'referencias'].includes(p)) return p;
+  
+  // Match tools as sub-routes: /ferramentas/[tool]
+  if (p.startsWith('ferramentas/')) {
+    const sub = p.substring('ferramentas/'.length);
+    if (['checklist', 'contraste', 'simulador', 'avaliador'].includes(sub)) {
+      return p;
+    }
+  }
+  
+  // For backwards compatibility: /checklist -> /ferramentas/checklist
+  if (['checklist', 'contraste', 'simulador', 'avaliador'].includes(p)) {
+    return 'ferramentas/' + p;
+  }
+  
   return 'hub';
 }
 
@@ -115,13 +130,14 @@ export default function App() {
       <Nav route={route} setRoute={setRoute} theme={activeTheme} setTheme={setTheme} />
       <main id="main" tabIndex="-1">
         {route === 'hub' && <HubPage setRoute={setRoute} heroVariant={tweaks.heroVariant} accent={tweaks.accent} theme={activeTheme} />}
-        {route === 'checklist' && <ChecklistPage setRoute={setRoute} />}
-        {route === 'contraste' && <ContrastPage setRoute={setRoute} />}
-        {route === 'simulador' && <SimulatorPage setRoute={setRoute} />}
+        {route === 'ferramentas/checklist' && <ChecklistPage setRoute={setRoute} />}
+        {route === 'ferramentas/contraste' && <ContrastPage setRoute={setRoute} />}
+        {route === 'ferramentas/simulador' && <SimulatorPage setRoute={setRoute} />}
         {route === 'sobre' && <AboutPage setRoute={setRoute} />}
         {route === 'privacidade' && <PrivacyPage setRoute={setRoute} />}
         {route === 'referencias' && <ReferencesPage setRoute={setRoute} />}
-        {route === 'avaliador' && <EvaluatorPage setRoute={setRoute} />}
+        {route === 'ferramentas/avaliador' && <EvaluatorPage setRoute={setRoute} />}
+        {route === 'ferramentas' && <ToolsPage setRoute={setRoute} accent={tweaks.accent} />}
       </main>
       <CookieConsent />
 

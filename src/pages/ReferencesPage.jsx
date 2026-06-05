@@ -133,7 +133,7 @@ export function ReferencesPage({ setRoute }) {
             <span aria-hidden="true">/</span>
             <span aria-current="page">Referências</span>
           </nav>
-          <p className="eyebrow">Recursos & Referências · v1.0</p>
+          <p className="eyebrow">Aprendizados · v1.0</p>
           <h1 className="page-title">Explore e domine<br />a acessibilidade digital</h1>
           <p className="lede">
             Uma seleção com curadoria de artigos, livros, notebooks interativos e referências

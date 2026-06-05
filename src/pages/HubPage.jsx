@@ -55,13 +55,13 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
           </p>
 
           <div className="hero-cta">
-            <button className="btn btn-primary" onClick={() => setRoute('checklist')}>
+            <button className="btn btn-primary" onClick={() => setRoute('ferramentas/checklist')}>
               Explorar o checklist
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <button className="btn btn-outline" onClick={() => setRoute('contraste')}>
+            <button className="btn btn-outline" onClick={() => setRoute('ferramentas/contraste')}>
               Verificar contraste
             </button>
           </div>
@@ -156,7 +156,7 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
               { k: 'Categorias', v: String(categoriesCount) },
               { k: 'Nível', v: 'A · AA · AAA' },
             ]}
-            onClick={() => setRoute('checklist')}
+            onClick={() => setRoute('ferramentas/checklist')}
             accent={accent}
           />
           <ToolCard
@@ -170,21 +170,21 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
               { k: 'Sugestor', v: 'Automático' },
               { k: 'Formato', v: 'Hex · RGB' },
             ]}
-            onClick={() => setRoute('contraste')}
+            onClick={() => setRoute('ferramentas/contraste')}
             accent={accent}
           />
           <ToolCard
             num="03"
             title="Simulador"
             tag="Daltonismo · baixa visão · foco"
-            status={{ label: 'Em breve', kind: 'warning' }}
-            desc="Simula como pessoas com diferentes condições veem sua interface: protanopia, deuteranopia, tritanopia, catarata, glaucoma, baixa contraste. Opera 100% por teclado, sem drag."
+            status={{ label: 'Disponível', kind: 'success' }}
+            desc="Simula em tempo real como pessoas com diferentes condições visuais ou cognitivas percebem sua interface (protanopia, deuteranopia, tritanopia, catarata, glaucoma, etc.)."
             stats={[
               { k: 'Condições', v: '8' },
               { k: 'Teclado', v: '100%' },
-              { k: 'Launch', v: 'Q4/26' },
+              { k: 'Suportes', v: 'Imagem / URL / Form' },
             ]}
-            disabled
+            onClick={() => setRoute('ferramentas/simulador')}
             accent={accent}
           />
           <ToolCard
@@ -198,7 +198,7 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
               { k: 'Custo', v: 'Zero/Browser' },
               { k: 'Score', v: '0 a 100' },
             ]}
-            onClick={() => setRoute('avaliador')}
+            onClick={() => setRoute('ferramentas/avaliador')}
             accent={accent}
           />
         </div>

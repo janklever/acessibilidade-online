@@ -399,6 +399,8 @@ export function EvaluatorPage({ setRoute }) {
           <nav className="crumbs" aria-label="Breadcrumb">
             <a href="#/" onClick={(e) => { e.preventDefault(); setRoute('hub'); }}>Início</a>
             <span aria-hidden="true">/</span>
+            <a href="#/ferramentas" onClick={(e) => { e.preventDefault(); setRoute('ferramentas'); }}>Ferramentas</a>
+            <span aria-hidden="true">/</span>
             <span aria-current="page">Avaliador</span>
           </nav>
           <p className="eyebrow">Ferramenta 04</p>
