@@ -61,7 +61,7 @@ export function AboutPage({ setRoute }) {
               processo.
             </p>
             <p>
-              <a href="https://github.com/janklever/acessibilidade-online" target="_blank" rel="noopener noreferrer">Repositório</a> · <a href="https://github.com/janklever/acessibilidade-online/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Diretrizes de Contribuição</a>
+              <a href="https://github.com/janklever/acessibilidade-online" target="_blank" rel="noopener noreferrer">Repositório</a> · <a href="https://github.com/janklever/acessibilidade-online/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Diretrizes de contribuição</a>
             </p>
           </article>
         </div>

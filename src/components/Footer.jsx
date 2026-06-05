@@ -67,6 +67,7 @@ export function SiteFooter({ setRoute }) {
               <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm" target="_blank" rel="noopener noreferrer">LBI (Lei 13.146/2015) <ArrowOutwardIcon /></a></li>
               <li><a href="https://emag.governoeletronico.gov.br/" target="_blank" rel="noopener noreferrer">eMAG 3.1 <ArrowOutwardIcon /></a></li>
               <li><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 <ArrowOutwardIcon /></a></li>
+              <li><a href="https://www.w3.org/WAI/ARIA/apg/" target="_blank" rel="noopener noreferrer">WAI-ARIA APG <ArrowOutwardIcon /></a></li>
               <li><a href="https://github.com/Myndex/apca-w3" target="_blank" rel="noopener noreferrer">APCA W3 <ArrowOutwardIcon /></a></li>
             </ul>
           </div>
