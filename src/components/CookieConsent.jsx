@@ -128,7 +128,7 @@ export function CookieConsent() {
             <path d="M11 17v.01" />
             <path d="M7 14v.01" />
           </svg>
-          Preferências de Privacidade
+          Preferências de privacidade
         </div>
         <p id="cookie-banner-desc" className="cookie-desc">
           Utilizamos cookies e tecnologias semelhantes para fornecer recursos essenciais, analisar tráfego de forma anônima e melhorar sua experiência de desenvolvimento. Consulte nossa <a href="/privacidade" onClick={(e) => { e.preventDefault(); window.openCookieConsent(null); window.location.pathname = '/privacidade'; }}>Política de Privacidade</a>.
