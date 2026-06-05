@@ -7,6 +7,7 @@ import { SimulatorPage } from './pages/SimulatorPage';
 import { AboutPage } from './pages/AboutPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { ReferencesPage } from './pages/ReferencesPage';
+import { EvaluatorPage } from './pages/EvaluatorPage';
 import './styles/main.scss';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -22,7 +23,7 @@ const TWEAK_DEFAULTS = {
 function readRoute() {
   const p = location.pathname.replace(/^\//, '').trim();
   if (!p || p === '/') return 'hub';
-  if (['checklist', 'contraste', 'simulador', 'sobre', 'privacidade', 'hub', 'referencias'].includes(p)) return p;
+  if (['checklist', 'contraste', 'simulador', 'sobre', 'privacidade', 'hub', 'referencias', 'avaliador'].includes(p)) return p;
   return 'hub';
 }
 
@@ -120,6 +121,7 @@ export default function App() {
         {route === 'sobre' && <AboutPage setRoute={setRoute} />}
         {route === 'privacidade' && <PrivacyPage setRoute={setRoute} />}
         {route === 'referencias' && <ReferencesPage setRoute={setRoute} />}
+        {route === 'avaliador' && <EvaluatorPage setRoute={setRoute} />}
       </main>
       <CookieConsent />
 
