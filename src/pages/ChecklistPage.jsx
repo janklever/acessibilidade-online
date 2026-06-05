@@ -1,6 +1,10 @@
-// Checklist page — 71 critérios, 16 categorias, filtros, progresso, export
-const ChecklistPage = ({ setRoute }) => {
-  const data = window.CHECKLIST_DATA;
+import React from 'react';
+import { CHECKLIST_DATA } from '../data/checklist-data';
+import { SiteFooter, DotIcon, CheckIcon } from '../components/Footer';
+import { generateJSON, generateMarkdown, generateHTML, triggerDownload } from '../utils/export-helpers';
+
+export function ChecklistPage({ setRoute }) {
+  const data = CHECKLIST_DATA;
   const cats = React.useMemo(() => {
     const map = {};
     data.forEach(item => { map[item.cat] = (map[item.cat] || 0) + 1; });
@@ -14,9 +18,43 @@ const ChecklistPage = ({ setRoute }) => {
     catch { return {}; }
   });
   const [expanded, setExpanded] = React.useState({});
+  const [showConfirm, setShowConfirm] = React.useState(false);
+  const [showDownloadMenu, setShowDownloadMenu] = React.useState(false);
+  const menuRef = React.useRef(null);
+
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowDownloadMenu(false);
+      }
+    }
+    if (showDownloadMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDownloadMenu]);
+
+  React.useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setShowDownloadMenu(false);
+      }
+    }
+    if (showDownloadMenu) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showDownloadMenu]);
 
   React.useEffect(() => {
     localStorage.setItem('ac.checklist', JSON.stringify(checked));
+    if (Object.values(checked).filter(Boolean).length === 0) {
+      setShowConfirm(false);
+    }
   }, [checked]);
 
   const toggle = (i) => setChecked(prev => ({ ...prev, [i]: !prev[i] }));
@@ -42,7 +80,8 @@ const ChecklistPage = ({ setRoute }) => {
   }, [data, checked]);
 
   const resetAll = () => {
-    if (confirm('Desmarcar todos os 71 critérios?')) setChecked({});
+    setChecked({});
+    setShowConfirm(false);
   };
 
   return (
@@ -60,7 +99,7 @@ const ChecklistPage = ({ setRoute }) => {
               <p className="eyebrow">Ferramenta 01</p>
               <h1 className="page-title">Checklist de acessibilidade</h1>
               <p className="lede">
-                71 critérios organizados em 16 categorias, mapeados a cláusulas do
+                {data.length} critérios organizados em {cats.length - 1} categorias, mapeados a cláusulas do
                 WCAG 2.2 e da LBI. Marque o progresso, expanda os detalhes para
                 entender o <em>porquê</em> de cada item, e exporte relatório ao fim.
               </p>
@@ -82,15 +121,75 @@ const ChecklistPage = ({ setRoute }) => {
                 <div className="progress-fill" style={{ width: `${percent}%` }}></div>
               </div>
               <div className="progress-actions">
-                <button className="btn btn-sm btn-outline" onClick={resetAll}>
-                  Limpar progresso
-                </button>
-                <button className="btn btn-sm btn-primary" disabled={checkedCount === 0}>
-                  <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-                    <path d="M8 2v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  Baixar relatório
-                </button>
+                {showConfirm ? (
+                  <>
+                    <button className="btn btn-sm btn-danger" onClick={resetAll}>
+                      Limpar tudo?
+                    </button>
+                    <button className="btn btn-sm btn-outline" onClick={() => setShowConfirm(false)}>
+                      Cancelar
+                    </button>
+                  </>
+                ) : (
+                  <button className="btn btn-sm btn-outline" onClick={() => setShowConfirm(true)} disabled={checkedCount === 0}>
+                    Limpar progresso
+                  </button>
+                )}
+                <div className="download-dropdown-container" ref={menuRef}>
+                  <button
+                    className="btn btn-sm btn-primary"
+                    disabled={checkedCount === 0}
+                    onClick={() => setShowDownloadMenu(prev => !prev)}
+                    aria-haspopup="true"
+                    aria-expanded={showDownloadMenu}
+                    id="download-btn"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M8 2v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Baixar relatório
+                  </button>
+                  {showDownloadMenu && (
+                    <ul className="download-dropdown-menu" role="menu" aria-labelledby="download-btn">
+                      <li role="none">
+                        <button
+                          role="menuitem"
+                          onClick={() => {
+                            const content = generateHTML(checked, data);
+                            triggerDownload(content, 'relatorio-acessibilidade.html', 'text/html');
+                            setShowDownloadMenu(false);
+                          }}
+                        >
+                          Página (.html)
+                        </button>
+                      </li>
+                      <li role="none">
+                        <button
+                          role="menuitem"
+                          onClick={() => {
+                            const content = generateMarkdown(checked, data);
+                            triggerDownload(content, 'relatorio-acessibilidade.md', 'text/markdown');
+                            setShowDownloadMenu(false);
+                          }}
+                        >
+                          Markdown (.md)
+                        </button>
+                      </li>
+                      <li role="none">
+                        <button
+                          role="menuitem"
+                          onClick={() => {
+                            const content = generateJSON(checked, data);
+                            triggerDownload(content, 'relatorio-acessibilidade.json', 'application/json');
+                            setShowDownloadMenu(false);
+                          }}
+                        >
+                          JSON (.json)
+                        </button>
+                      </li>
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -100,6 +199,25 @@ const ChecklistPage = ({ setRoute }) => {
       <section className="checklist-body">
         <div className="container checklist-layout">
           <aside className="checklist-sidebar" aria-label="Filtros">
+            <div className="filter-group">
+              <h2 className="filter-title">Nível WCAG</h2>
+              <div className="filter-chips">
+                {[
+                  { k: 'all', l: 'Tudo' },
+                  { k: 'A', l: 'A' },
+                  { k: 'AA', l: 'AA' },
+                  { k: 'AAA', l: 'AAA' },
+                ].map(l => (
+                  <button key={l.k}
+                    className={`chip ${levelFilter === l.k ? 'is-active' : ''}`}
+                    onClick={() => setLevelFilter(l.k)}
+                    aria-pressed={levelFilter === l.k}>
+                    {l.l}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="filter-group">
               <h2 className="filter-title">Categorias</h2>
               <ul className="filter-list">
@@ -124,31 +242,12 @@ const ChecklistPage = ({ setRoute }) => {
               </ul>
             </div>
 
-            <div className="filter-group">
-              <h2 className="filter-title">Nível WCAG</h2>
-              <div className="filter-chips">
-                {[
-                  { k: 'all', l: 'Tudo' },
-                  { k: 'A', l: 'A' },
-                  { k: 'AA', l: 'AA' },
-                  { k: 'AAA', l: 'AAA' },
-                ].map(l => (
-                  <button key={l.k}
-                          className={`chip ${levelFilter === l.k ? 'is-active' : ''}`}
-                          onClick={() => setLevelFilter(l.k)}
-                          aria-pressed={levelFilter === l.k}>
-                    {l.l}
-                  </button>
-                ))}
-              </div>
-            </div>
-
             <div className="filter-group hint">
               <h2 className="filter-title">Dica</h2>
               <p className="hint-text">
                 Use <kbd>Tab</kbd> para navegar, <kbd>Espaço</kbd> para marcar, e
                 <kbd>Enter</kbd> para expandir os detalhes. Todo o checklist é
-                100% operável por teclado — é item #5 dele mesmo.
+                100% operável por teclado.
               </p>
             </div>
           </aside>
@@ -162,12 +261,12 @@ const ChecklistPage = ({ setRoute }) => {
               <button
                 className="btn btn-sm btn-ghost"
                 onClick={() => {
-                  const allExp = filtered.every(it => expanded[it.idx]);
+                  const allExp = filtered.length > 0 && filtered.every(it => expanded[it.idx]);
                   const next = {};
                   filtered.forEach(it => { next[it.idx] = !allExp; });
                   setExpanded(prev => ({ ...prev, ...next }));
                 }}>
-                Expandir / recolher tudo
+                {filtered.length > 0 && filtered.every(it => expanded[it.idx]) ? 'Recolher tudo' : 'Expandir tudo'}
               </button>
             </div>
 
@@ -194,10 +293,28 @@ const ChecklistPage = ({ setRoute }) => {
         </div>
       </section>
 
-      <SiteFooter setRoute={setRoute}/>
+      <SiteFooter setRoute={setRoute} />
     </div>
   );
-};
+}
+
+function renderFormattedText(text) {
+  if (!text) return null;
+  const cleanText = text.replace(/\\×/g, '×');
+  const parts = cleanText.split(/(`[^`]+`|\\<[^>]+\\>|<[a-zA-Z0-9="'.#_:\s\-\/]+>)/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return <code key={idx} className="code-highlight">{part.slice(1, -1)}</code>;
+    }
+    if (part.startsWith('\\<') && part.endsWith('\\>')) {
+      return <code key={idx} className="code-highlight">{part.slice(1)}</code>;
+    }
+    if (part.startsWith('<') && part.endsWith('>')) {
+      return <code key={idx} className="code-highlight">{part}</code>;
+    }
+    return part;
+  });
+}
 
 function ChecklistItem({ item, checked, expanded, onToggle, onExpand }) {
   return (
@@ -211,7 +328,7 @@ function ChecklistItem({ item, checked, expanded, onToggle, onExpand }) {
           aria-labelledby={`ci-title-${item.idx}`}>
           {checked && (
             <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-              <path d="M3 7.5 L6 10.5 L11 4.5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M3 7.5 L6 10.5 L11 4.5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
         </button>
@@ -227,9 +344,9 @@ function ChecklistItem({ item, checked, expanded, onToggle, onExpand }) {
             className="check-title"
             onClick={onExpand}
             aria-expanded={expanded}>
-            {item.title}
+            {renderFormattedText(item.title)}
             <svg className="chevron" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-              <path d="M3 5 L7 9 L11 5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M3 5 L7 9 L11 5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
@@ -237,11 +354,9 @@ function ChecklistItem({ item, checked, expanded, onToggle, onExpand }) {
 
       {expanded && (
         <div className="check-detail">
-          <p>{item.detail}</p>
+          <p>{renderFormattedText(item.detail)}</p>
         </div>
       )}
     </li>
   );
 }
-
-window.ChecklistPage = ChecklistPage;

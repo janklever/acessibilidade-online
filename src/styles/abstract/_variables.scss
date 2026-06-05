@@ -1,0 +1,15 @@
+// Design Tokens
+$font-display: 'Syne', 'Manrope', system-ui, sans-serif;
+$font-body: 'Manrope', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+// Motion
+$duration-instant: 100ms;
+$duration-fast: 150ms;
+$duration-base: 200ms;
+$duration-slow: 300ms;
+$duration-page: 400ms;
+
+$ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+$ease-in: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+$ease-inout: cubic-bezier(0.4, 0.0, 0.2, 1.0);

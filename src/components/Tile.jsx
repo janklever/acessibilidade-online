@@ -1,5 +1,7 @@
-// Azulejo pattern — decorative SVG used as cultural cue
-function AzulejoGrid({ opacity = 0.12, className = '' }) {
+import React from 'react';
+
+// Tile pattern — decorative SVG used as cultural cue
+export function TileGrid({ opacity = 0.12, className = '' }) {
   return (
     <svg className={`azulejo ${className}`} aria-hidden="true" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
@@ -23,5 +25,3 @@ function AzulejoGrid({ opacity = 0.12, className = '' }) {
     </svg>
   );
 }
-
-window.AzulejoGrid = AzulejoGrid;

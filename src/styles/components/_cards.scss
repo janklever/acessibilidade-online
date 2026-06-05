@@ -1,0 +1,156 @@
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--duration-base) var(--ease-out);
+}
+[data-theme="light"] .card {
+  box-shadow: var(--shadow-sm);
+}
+
+.tool-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: all var(--duration-base) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  &:hover:not(.is-disabled) {
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-2);
+  }
+  [data-theme="light"] &:hover:not(.is-disabled) {
+    box-shadow: var(--shadow-md);
+  }
+  &.is-disabled {
+    opacity: 0.72;
+  }
+}
+
+.tool-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tool-num {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.12em;
+}
+
+.tool-icon {
+  color: var(--color-accent);
+}
+.tool-card:nth-child(2) .tool-icon { color: var(--color-accent-alt); }
+.tool-card:nth-child(3) .tool-icon { color: var(--color-azulejo); }
+
+.tool-body { flex: 1; }
+.tool-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.tool-tag {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  letter-spacing: 0.04em;
+}
+.tool-desc {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.tool-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.tool-stat-k {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.tool-stat-v {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.tool-foot {
+  margin-top: auto;
+}
+.tool-cta {
+  width: 100%;
+  justify-content: space-between;
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+}
+
+.metric-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  &.is-pass { border-color: color-mix(in srgb, var(--color-accent-alt) 40%, var(--color-border)); }
+  &.is-fail { border-color: color-mix(in srgb, var(--color-error) 40%, var(--color-border)); }
+  &.is-warn { border-color: color-mix(in srgb, var(--color-warning) 40%, var(--color-border)); }
+}
+
+.metric-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+}
+.metric-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.metric-sub { font-size: var(--text-xs); color: var(--color-text-subtle); }
+.metric-icon {
+  width: 28px; height: 28px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  &.is-pass { background: var(--color-accent-alt); color: #fff; }
+  &.is-warn { background: var(--color-warning); color: #0D0F12; }
+  &.is-fail { background: var(--color-error); color: #fff; }
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.metric-desc { font-size: var(--text-sm); color: var(--color-text-muted); }
+
+.suggestion-card {
+  background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
