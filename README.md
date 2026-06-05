@@ -1,5 +1,7 @@
 # Acessibilidade digital
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3a76f8d0-7d59-4b3f-8665-0e1e37fc5fde/deploy-status)](https://app.netlify.com/projects/acessibilidadeonline/deploys)
+
 Um hub de ferramentas, guias e auditoria para acessibilidade web em contexto brasileiro.
 
 ---
