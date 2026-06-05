@@ -38,17 +38,18 @@ export function SiteFooter({ setRoute }) {
     <footer className="site-footer" role="contentinfo">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <span className="brand-mark" aria-hidden="true"><Logo size={28} /></span>
-          <div>
-            <div className="footer-wordmark">
-              <span className="brand-root">acessibilidade</span>
-              <span className="brand-tld">.online</span>
-            </div>
-            <p className="footer-tag">
-              Hub de acessibilidade digital para o Brasil.<br />
-              <span className="mono">v1.0 · abril de 2026 · São Paulo</span>
-            </p>
+          <div className="footer-wordmark">
+            <span className="brand-mark" aria-hidden="true"><Logo size={24} /></span>
+            <span className="brand-text">
+              <span className="brand-root">Acessibilidade</span>
+              &nbsp;
+              <span className="brand-tld">Online</span>
+            </span>
           </div>
+          <p className="footer-tag">
+            Hub de acessibilidade digital para o Brasil.<br />
+            <span className="mono">v1.0 · abril de 2026 · São Paulo</span>
+          </p>
         </div>
 
         <div className="footer-cols">
