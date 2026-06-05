@@ -90,6 +90,189 @@
   justify-content: end;
 }
 
+.theme-toggle-desktop {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.menu-toggle {
+  display: none;
+  @include mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    transition: background-color var(--duration-fast);
+    
+    &:hover {
+      background: color-mix(in srgb, var(--color-text) 8%, transparent);
+    }
+    
+    .hamburger-lines {
+      position: relative;
+      width: 18px;
+      height: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      
+      span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: currentColor;
+        transition: transform var(--duration-base) var(--ease-inout), opacity var(--duration-base) var(--ease-inout), top var(--duration-base) var(--ease-inout);
+        position: absolute;
+        
+        &:nth-child(1) {
+          top: 0;
+        }
+        &:nth-child(2) {
+          top: 5px;
+        }
+        &:nth-child(3) {
+          top: 10px;
+        }
+      }
+    }
+    
+    &.is-active {
+      .hamburger-lines {
+        span {
+          &:nth-child(1) {
+            top: 5px;
+            transform: rotate(45deg);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+          }
+          &:nth-child(3) {
+            top: 5px;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-menu-overlay {
+  display: none;
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--color-bg);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--duration-slow) var(--ease-inout), visibility var(--duration-slow) var(--ease-inout);
+    padding: var(--space-8);
+    gap: var(--space-8);
+    
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      
+      .mobile-nav-link {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.mobile-nav-link {
+  font-size: var(--text-2xl);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out), transform var(--duration-slow) var(--ease-out), opacity var(--duration-slow) var(--ease-out);
+  transform: translateY(20px);
+  opacity: 0;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  
+  &:hover {
+    color: var(--color-text);
+  }
+  
+  &.is-active {
+    color: var(--color-accent);
+  }
+  
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.05s};
+    }
+  }
+}
+
+.mobile-menu-actions {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-20);
+  width: 80%;
+  max-width: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.theme-toggle-mobile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 12px 24px;
+  background: color-mix(in srgb, var(--color-text) 5%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--duration-fast), transform var(--duration-fast);
+  
+  &:hover {
+    background: color-mix(in srgb, var(--color-text) 8%, transparent);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  svg {
+    color: var(--color-accent);
+  }
+}
+
 .nav-divider {
   width: 1px;
   height: 20px;

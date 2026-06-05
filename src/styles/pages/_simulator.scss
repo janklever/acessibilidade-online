@@ -27,6 +27,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+
+  h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text);
+  }
 }
 
 .sim-list {
@@ -104,17 +111,17 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
-  font-size: var(--text-sm);
 
   h3 {
-    font-size: var(--text-sm);
+    font-size: var(--text-lg);
     font-weight: 600;
-    margin-bottom: var(--space-2);
-    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    color: var(--color-text-muted);
   }
 
   p {
-    color: var(--color-text-muted);
+    font-size: var(--text-md);
+    color: var(--color-text);
     line-height: 1.4;
     margin: 0;
   }
@@ -124,7 +131,7 @@
 .sim-workspace {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 .sim-mode-tabs {
@@ -145,6 +152,11 @@
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   position: relative;
   transition: color var(--duration-fast) var(--ease-out);
+
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 
   &:hover {
     color: var(--color-text);
@@ -175,7 +187,7 @@
   position: relative;
   background: #ffffff;
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   min-height: 520px;
   display: flex;

@@ -270,10 +270,7 @@ export function SimulatorPage({ setRoute }) {
         <div className="sim-container">
           {/* Sidebar Controls */}
           <aside className="sim-controls-sidebar">
-            <div className="sim-info-panel">
-              <h3>Condição selecionada</h3>
-              <p>Escolha um filtro abaixo para distorcer a visualização no viewport da direita.</p>
-            </div>
+            <h3>Escolha um dos filtros:</h3>
 
             <nav className="sim-list" aria-label="Condições visuais para simulação">
               {CONDITIONS.map((c) => (
@@ -291,11 +288,6 @@ export function SimulatorPage({ setRoute }) {
                 </button>
               ))}
             </nav>
-
-            <div className="sim-info-panel" style={{ marginTop: 'auto' }}>
-              <h3>Sobre a condição</h3>
-              <p><strong>{activeConditionInfo.name}:</strong> {activeConditionInfo.info}</p>
-            </div>
           </aside>
 
           {/* Main Simulator Workspace */}
@@ -319,12 +311,18 @@ export function SimulatorPage({ setRoute }) {
               </button>
               <button
                 role="tab"
-                aria-selected={activeTab === 'url'}
-                className={`sim-tab-btn ${activeTab === 'url' ? 'is-active' : ''}`}
-                onClick={() => setActiveTab('url')}
+                // aria-selected={activeTab === 'url'}
+                className={`sim-tab-btn is-disabled`}
+                // onClick={() => setActiveTab('url')}
+                disabled
               >
-                Visualizar site (URL)
+                Visualizar site <strong>[EM BREVE]</strong>
               </button>
+            </div>
+
+            <div className="sim-info-panel" style={{ marginTop: 'auto' }}>
+              <h3>Sobre a condição</h3>
+              <p><strong>{activeConditionInfo.name}:</strong> {activeConditionInfo.info}</p>
             </div>
 
             {/* Viewport Box */}
