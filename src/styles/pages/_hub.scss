@@ -208,7 +208,7 @@
   gap: 4px;
   font-size: var(--text-xs);
   font-weight: 600;
-  &.is-pass { color: var(--color-accent-alt); }
+  &.is-pass { color: var(--color-success); }
   &.is-warn { color: var(--color-warning); }
   &.is-fail { color: color-mix(in srgb, var(--color-error) 80%, white); }
 }
@@ -228,10 +228,8 @@
 
 .tool-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
   gap: var(--space-6);
-  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 640px) { grid-template-columns: 1fr; }
 }
 
 .principles {

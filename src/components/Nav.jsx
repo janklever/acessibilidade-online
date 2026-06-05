@@ -14,10 +14,16 @@ export function Logo({ size = 28 }) {
 export function Nav({ route, setRoute, theme, setTheme }) {
   const items = [
     { id: 'sobre', label: 'Sobre' },
-    { id: 'checklist', label: 'Checklist' },
-    { id: 'contraste', label: 'Contraste' },
-    { id: 'simulador', label: 'Simulador' },
+    { id: 'ferramentas', label: 'Ferramentas' },
+    { id: 'referencias', label: 'Referências' },
   ];
+
+  const isTabActive = (id) => {
+    if (id === 'ferramentas') {
+      return route === 'ferramentas' || route.startsWith('ferramentas/');
+    }
+    return route === id;
+  };
 
   return (
     <header className="site-nav">
@@ -38,8 +44,8 @@ export function Nav({ route, setRoute, theme, setTheme }) {
           {items.map(item => (
             <a key={item.id}
               href={`/${item.id}`}
-              className={`nav-link ${route === item.id ? 'is-active' : ''}`}
-              aria-current={route === item.id ? 'page' : undefined}
+              className={`nav-link ${isTabActive(item.id) ? 'is-active' : ''}`}
+              aria-current={isTabActive(item.id) ? 'page' : undefined}
               onClick={(e) => { e.preventDefault(); setRoute(item.id); }}>
               {item.label}
             </a>

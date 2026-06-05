@@ -1,0 +1,8 @@
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+
+.tools-page {
+  .tools-list-section {
+    padding: var(--space-12) var(--space-6) var(--space-20);
+  }
+}

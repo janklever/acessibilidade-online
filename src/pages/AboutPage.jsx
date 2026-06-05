@@ -16,7 +16,7 @@ export function AboutPage({ setRoute }) {
             <span aria-current="page">Sobre</span>
           </nav>
           <p className="eyebrow">Manifesto · v1.0</p>
-          <h1 className="page-title">Um hub brasileiro,<br />escrito por quem codifica.</h1>
+          <h1 className="page-title">Um hub brasileiro,<br />escrito por quem codifica</h1>
           <p className="lede">
             Acessibilidade Online nasceu de uma frustração simples: o conteúdo
             mais citado sobre acessibilidade digital não fala português, não
@@ -61,7 +61,7 @@ export function AboutPage({ setRoute }) {
               processo.
             </p>
             <p>
-              <a href="https://github.com/janklever/acessibilidade-online" target="_blank" rel="noopener noreferrer">Repositório</a> · <a href="https://github.com/janklever/acessibilidade-online/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Diretrizes de Contribuição</a>
+              <a href="https://github.com/janklever/acessibilidade-online" target="_blank" rel="noopener noreferrer">Repositório</a> · <a href="https://github.com/janklever/acessibilidade-online/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Diretrizes de contribuição</a>
             </p>
           </article>
         </div>

@@ -55,13 +55,13 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
           </p>
 
           <div className="hero-cta">
-            <button className="btn btn-primary" onClick={() => setRoute('checklist')}>
+            <button className="btn btn-primary" onClick={() => setRoute('ferramentas/checklist')}>
               Explorar o checklist
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <button className="btn btn-outline" onClick={() => setRoute('contraste')}>
+            <button className="btn btn-outline" onClick={() => setRoute('ferramentas/contraste')}>
               Verificar contraste
             </button>
           </div>
@@ -136,7 +136,7 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
       {/* ============ TOOL CARDS ============ */}
       <section className="tools container" aria-labelledby="ferramentas-heading">
         <header className="section-head">
-          <p className="eyebrow">Três ferramentas, um ecossistema</p>
+          <p className="eyebrow">Quatro ferramentas, um ecossistema</p>
           <h2 id="ferramentas-heading">Use, audite, compartilhe.</h2>
           <p className="lede">
             Cada ferramenta funciona sozinha. Juntas, cobrem o ciclo de trabalho
@@ -156,7 +156,7 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
               { k: 'Categorias', v: String(categoriesCount) },
               { k: 'Nível', v: 'A · AA · AAA' },
             ]}
-            onClick={() => setRoute('checklist')}
+            onClick={() => setRoute('ferramentas/checklist')}
             accent={accent}
           />
           <ToolCard
@@ -170,21 +170,35 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
               { k: 'Sugestor', v: 'Automático' },
               { k: 'Formato', v: 'Hex · RGB' },
             ]}
-            onClick={() => setRoute('contraste')}
+            onClick={() => setRoute('ferramentas/contraste')}
             accent={accent}
           />
           <ToolCard
             num="03"
             title="Simulador"
             tag="Daltonismo · baixa visão · foco"
-            status={{ label: 'Em breve', kind: 'warning' }}
-            desc="Simula como pessoas com diferentes condições veem sua interface: protanopia, deuteranopia, tritanopia, catarata, glaucoma, baixa contraste. Opera 100% por teclado, sem drag."
+            status={{ label: 'Disponível', kind: 'success' }}
+            desc="Simula em tempo real como pessoas com diferentes condições visuais ou cognitivas percebem sua interface (protanopia, deuteranopia, tritanopia, catarata, glaucoma, etc.)."
             stats={[
               { k: 'Condições', v: '8' },
               { k: 'Teclado', v: '100%' },
-              { k: 'Launch', v: 'Q4/26' },
+              { k: 'Suportes', v: 'Imagem / URL / Form' },
             ]}
-            disabled
+            onClick={() => setRoute('ferramentas/simulador')}
+            accent={accent}
+          />
+          <ToolCard
+            num="04"
+            title="Avaliador"
+            tag="Auditor estrutural de acessibilidade"
+            status={{ label: 'Disponível', kind: 'success' }}
+            desc="Validador automático de HTML. Analisa marcação, atributos de mídia, acessibilidade de formulários/botões e problemas de zoom. Funciona colando HTML ou digitando uma URL."
+            stats={[
+              { k: 'Validações', v: '9 tipos' },
+              { k: 'Custo', v: 'Zero/Browser' },
+              { k: 'Score', v: '0 a 100' },
+            ]}
+            onClick={() => setRoute('ferramentas/avaliador')}
             accent={accent}
           />
         </div>
@@ -264,6 +278,14 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
             <>
               <circle cx="30" cy="30" r="5" stroke="currentColor" strokeWidth="1.6" fill="none" />
               <circle cx="30" cy="30" r="1.8" fill="currentColor" />
+            </>
+          )}
+          {num === '04' && (
+            <>
+              <rect x="22" y="20" width="16" height="20" rx="1" stroke="currentColor" strokeWidth="1.6" fill="none" />
+              <line x1="26" y1="25" x2="34" y2="25" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <line x1="26" y1="30" x2="34" y2="30" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <line x1="26" y1="35" x2="30" y2="35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             </>
           )}
         </svg>

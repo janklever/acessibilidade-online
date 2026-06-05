@@ -1,4 +1,4 @@
-# Guia de Contribuição
+# Guia de contribuição
 
 Primeiramente, muito obrigado pelo interesse em contribuir para o projeto **Acessibilidade digital**! Toda ajuda para tornar a web brasileira mais acessível é extremamente bem-vinda.
 
@@ -42,19 +42,19 @@ Se encontrar erros ortográficos, informações desatualizadas sobre a LBI (Lei 
 * Abra uma **Issue** explicando o ponto.
 * Ou envie um **Pull Request (PR)** editando diretamente as informações na página relevante dentro de `src/pages/`.
 
-### 2. Contribuindo com Código (React/JS/CSS)
+### 2. Contribuindo com código (React/JS/CSS)
 * Para correções ou melhorias visuais, certifique-se de testar se a interface continua totalmente acessível via teclado e leitores de tela.
 * Siga a convenção de commits para manter o histórico limpo:
   * `feat(nome-da-funcionalidade): adiciona nova ferramenta...`
   * `fix(contraste): corrige erro de cálculo de luminosidade`
   * `docs(readme): atualiza informações de instalação`
 
-### 3. Testes de Acessibilidade
+### 3. Testes de acessibilidade
 Se você usa tecnologias assistivas (leitores de tela, navegação por teclado exclusivo, switches, etc.), o seu feedback sobre a usabilidade deste hub é a nossa maior prioridade. Sinta-se livre para abrir issues relatando qualquer barreira de acesso que encontrar!
 
 ---
 
-## 🤝 Processo de Revisão
+## 🤝 Processo de revisão
 
 Todos os Pull Requests passam por revisão de código. Buscamos sempre garantir que:
 1. O código seja semanticamente correto (HTML5).

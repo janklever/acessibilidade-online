@@ -6,6 +6,9 @@ import { ContrastPage } from './pages/ContrastPage';
 import { SimulatorPage } from './pages/SimulatorPage';
 import { AboutPage } from './pages/AboutPage';
 import { PrivacyPage } from './pages/PrivacyPage';
+import { ReferencesPage } from './pages/ReferencesPage';
+import { EvaluatorPage } from './pages/EvaluatorPage';
+import { ToolsPage } from './pages/ToolsPage';
 import './styles/main.scss';
 import { CookieConsent } from './components/CookieConsent';
 
@@ -19,9 +22,23 @@ const TWEAK_DEFAULTS = {
 };
 
 function readRoute() {
-  const p = location.pathname.replace(/^\//, '').trim();
+  const p = location.pathname.replace(/^\//, '').replace(/\/$/, '').trim();
   if (!p || p === '/') return 'hub';
-  if (['checklist', 'contraste', 'simulador', 'sobre', 'privacidade', 'hub'].includes(p)) return p;
+  if (['ferramentas', 'sobre', 'privacidade', 'hub', 'referencias'].includes(p)) return p;
+  
+  // Match tools as sub-routes: /ferramentas/[tool]
+  if (p.startsWith('ferramentas/')) {
+    const sub = p.substring('ferramentas/'.length);
+    if (['checklist', 'contraste', 'simulador', 'avaliador'].includes(sub)) {
+      return p;
+    }
+  }
+  
+  // For backwards compatibility: /checklist -> /ferramentas/checklist
+  if (['checklist', 'contraste', 'simulador', 'avaliador'].includes(p)) {
+    return 'ferramentas/' + p;
+  }
+  
   return 'hub';
 }
 
@@ -110,14 +127,17 @@ export default function App() {
 
   return (
     <>
-      <Nav route={route} setRoute={setRoute} theme={activeTheme} setTheme={setTheme}/>
+      <Nav route={route} setRoute={setRoute} theme={activeTheme} setTheme={setTheme} />
       <main id="main" tabIndex="-1">
-        {route === 'hub'       && <HubPage       setRoute={setRoute} heroVariant={tweaks.heroVariant} accent={tweaks.accent} theme={activeTheme}/>}
-        {route === 'checklist' && <ChecklistPage setRoute={setRoute}/>}
-        {route === 'contraste' && <ContrastPage  setRoute={setRoute}/>}
-        {route === 'simulador' && <SimulatorPage setRoute={setRoute}/>}
-        {route === 'sobre'     && <AboutPage     setRoute={setRoute}/>}
-        {route === 'privacidade' && <PrivacyPage setRoute={setRoute}/>}
+        {route === 'hub' && <HubPage setRoute={setRoute} heroVariant={tweaks.heroVariant} accent={tweaks.accent} theme={activeTheme} />}
+        {route === 'ferramentas/checklist' && <ChecklistPage setRoute={setRoute} />}
+        {route === 'ferramentas/contraste' && <ContrastPage setRoute={setRoute} />}
+        {route === 'ferramentas/simulador' && <SimulatorPage setRoute={setRoute} />}
+        {route === 'sobre' && <AboutPage setRoute={setRoute} />}
+        {route === 'privacidade' && <PrivacyPage setRoute={setRoute} />}
+        {route === 'referencias' && <ReferencesPage setRoute={setRoute} />}
+        {route === 'ferramentas/avaliador' && <EvaluatorPage setRoute={setRoute} />}
+        {route === 'ferramentas' && <ToolsPage setRoute={setRoute} accent={tweaks.accent} />}
       </main>
       <CookieConsent />
 
@@ -127,23 +147,23 @@ export default function App() {
             <div className="tweaks-title">Tweaks</div>
             <button className="icon-btn" onClick={() => setTweaksOpen(false)} aria-label="Fechar painel">
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-                <path d="M3 3 L11 11 M11 3 L3 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                <path d="M3 3 L11 11 M11 3 L3 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
             </button>
           </div>
           <div className="tweaks-body">
             <TweakRow label="Tema" value={tweaks.theme} onChange={(v) => updateTweak('theme', v)}
-                      options={[['auto','Auto'],['dark','Escuro'],['light','Claro']]}/>
+              options={[['auto', 'Auto'], ['dark', 'Escuro'], ['light', 'Claro']]} />
             <TweakRow label="Accent" value={tweaks.accent} onChange={(v) => updateTweak('accent', v)}
-                      options={[['azul','Azul'],['verde','Verde'],['azulejo','Azulejo'],['laranja','Laranja']]}/>
+              options={[['azul', 'Azul'], ['verde', 'Verde'], ['azulejo', 'Azulejo'], ['laranja', 'Laranja']]} />
             <TweakRow label="Hero" value={tweaks.heroVariant} onChange={(v) => updateTweak('heroVariant', v)}
-                      options={[['azulejo','Azulejo'],['plain','Limpo']]}/>
+              options={[['azulejo', 'Azulejo'], ['plain', 'Limpo']]} />
             <TweakRow label="Radius" value={tweaks.radius} onChange={(v) => updateTweak('radius', v)}
-                      options={[['sharp','Sharp'],['med','Médio'],['round','Round']]}/>
+              options={[['sharp', 'Sharp'], ['med', 'Médio'], ['round', 'Round']]} />
             <TweakRow label="Densidade" value={tweaks.density} onChange={(v) => updateTweak('density', v)}
-                      options={[['comfy','Confortável'],['compact','Compacta']]}/>
+              options={[['comfy', 'Confortável'], ['compact', 'Compacta']]} />
             <TweakRow label="Fonte display" value={tweaks.displayFont} onChange={(v) => updateTweak('displayFont', v)}
-                      options={[['syne','Syne'],['manrope','Manrope']]}/>
+              options={[['syne', 'Syne'], ['manrope', 'Manrope']]} />
           </div>
         </aside>
       )}
@@ -158,9 +178,9 @@ function TweakRow({ label, value, onChange, options }) {
       <div className="tweak-group">
         {options.map(([k, l]) => (
           <button key={k}
-                  className={`tweak-chip ${value === k ? 'is-active' : ''}`}
-                  onClick={() => onChange(k)}
-                  aria-pressed={value === k}>{l}</button>
+            className={`tweak-chip ${value === k ? 'is-active' : ''}`}
+            onClick={() => onChange(k)}
+            aria-pressed={value === k}>{l}</button>
         ))}
       </div>
     </div>
