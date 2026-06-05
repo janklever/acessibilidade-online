@@ -185,6 +185,15 @@
   transition: background var(--duration-fast);
   &:hover { background: var(--color-surface-2); }
   &.is-checked .check-title { color: var(--color-text-muted); }
+
+  .code-highlight {
+    font-family: monospace;
+    font-size: 0.9em;
+    padding: 2px 4px;
+    background: var(--color-border);
+    border-radius: 4px;
+    color: var(--color-primary);
+  }
 }
 
 .check-row {
@@ -202,14 +211,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-bg);
+  color: white;
   transition: all var(--duration-instant) var(--ease-out);
   margin-top: 2px;
   cursor: pointer;
 }
 .check-item.is-checked .check-box {
-  background: var(--color-accent-alt);
-  border-color: var(--color-accent-alt);
+  background: var(--color-success);
+  border-color: var(--color-success);
 }
 
 .check-main { flex: 1; min-width: 0; }
@@ -241,7 +250,7 @@
   background: transparent;
   color: var(--color-text-subtle);
   border: 1px solid var(--color-border);
-  &.level-A { color: var(--color-accent-alt); border-color: color-mix(in srgb, var(--color-accent-alt) 40%, transparent); }
+  &.level-A { color: var(--color-success); border-color: color-mix(in srgb, var(--color-success) 40%, transparent); }
   &.level-AA { color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 40%, transparent); }
   &.level-AAA { color: var(--color-warning); border-color: color-mix(in srgb, var(--color-warning) 40%, transparent); }
   &.level-LEI { color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 40%, transparent); }
@@ -257,16 +266,20 @@
   text-align: left;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   padding: 0;
   background: transparent;
   transition: color var(--duration-fast);
   line-height: 1.4;
   &:hover { color: var(--color-accent); }
 }
-.chevron { transition: transform var(--duration-base) var(--ease-out); flex-shrink: 0; }
+.chevron {
+  transition: transform var(--duration-base) var(--ease-out);
+  flex-shrink: 0;
+  margin-left: auto;
+}
 .check-item.is-expanded .chevron { transform: rotate(180deg); }
 
 .check-detail {

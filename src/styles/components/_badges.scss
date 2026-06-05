@@ -15,9 +15,9 @@
   color: var(--color-text-muted);
 }
 .badge-success {
-  background: color-mix(in srgb, var(--color-accent-alt) 14%, transparent);
-  color: var(--color-accent-alt);
-  border-color: color-mix(in srgb, var(--color-accent-alt) 32%, transparent);
+  background: color-mix(in srgb, var(--color-success) 14%, transparent);
+  color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 32%, transparent);
 }
 .badge-accent {
   background: color-mix(in srgb, var(--color-accent) 14%, transparent);

@@ -59,6 +59,7 @@ export function SiteFooter({ setRoute }) {
               <li><a href="/checklist" onClick={(e) => { e.preventDefault(); setRoute('checklist'); }}>Checklist</a></li>
               <li><a href="/contraste" onClick={(e) => { e.preventDefault(); setRoute('contraste'); }}>Contraste</a></li>
               <li><a href="/simulador" onClick={(e) => { e.preventDefault(); setRoute('simulador'); }}>Simulador</a></li>
+              <li><a href="/referencias" onClick={(e) => { e.preventDefault(); setRoute('referencias'); }}>Referências</a></li>
             </ul>
           </div>
           <div className="footer-col">

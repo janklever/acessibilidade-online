@@ -114,9 +114,9 @@
     font-weight: 900;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(8px);
-    &.is-pass { background: #028c53; color: #fff; border: 2px solid #fff; }
-    &.is-warn { background: #ca5900; color: #fff; border: 2px solid #fff; }
-    &.is-fail { background: #a00400; color: #fff; border: 2px solid #fff; }
+    &.is-pass { background: var(--color-success); color: white; border: 2px solid white; }
+    &.is-warn { background: var(--color-warning); color: white; border: 2px solid white; }
+    &.is-fail { background: var(--color-error); color: white; border: 2px solid white; }
   }
 }
 .preview-sample { margin: 0 0 var(--space-4); font-family: var(--font-body); }

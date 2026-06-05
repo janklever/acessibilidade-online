@@ -208,7 +208,7 @@
   gap: 4px;
   font-size: var(--text-xs);
   font-weight: 600;
-  &.is-pass { color: var(--color-accent-alt); }
+  &.is-pass { color: var(--color-success); }
   &.is-warn { color: var(--color-warning); }
   &.is-fail { color: color-mix(in srgb, var(--color-error) 80%, white); }
 }

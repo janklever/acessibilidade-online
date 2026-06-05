@@ -111,7 +111,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
-  &.is-pass { border-color: color-mix(in srgb, var(--color-accent-alt) 40%, var(--color-border)); }
+  &.is-pass { border-color: color-mix(in srgb, var(--color-success) 40%, var(--color-border)); }
   &.is-fail { border-color: color-mix(in srgb, var(--color-error) 40%, var(--color-border)); }
   &.is-warn { border-color: color-mix(in srgb, var(--color-warning) 40%, var(--color-border)); }
 }
@@ -135,7 +135,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  &.is-pass { background: var(--color-accent-alt); color: #fff; }
+  &.is-pass { background: var(--color-success); color: #fff; }
   &.is-warn { background: var(--color-warning); color: #0D0F12; }
   &.is-fail { background: var(--color-error); color: #fff; }
 }

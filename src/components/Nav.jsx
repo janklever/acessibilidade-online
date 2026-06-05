@@ -17,6 +17,7 @@ export function Nav({ route, setRoute, theme, setTheme }) {
     { id: 'checklist', label: 'Checklist' },
     { id: 'contraste', label: 'Contraste' },
     { id: 'simulador', label: 'Simulador' },
+    { id: 'referencias', label: 'Referências' },
   ];
 
   return (
