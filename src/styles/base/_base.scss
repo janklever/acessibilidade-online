@@ -2,27 +2,27 @@
 @use '../abstract/mixins' as *;
 
 :root {
-  /* ——— Color: Dark (default) ——— */
-  --color-bg: #0D0F12;
-  --color-surface: #161A20;
-  --color-surface-2: #1E2330;
-  --color-surface-3: #252B3B;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.14);
-  --color-text: #E8EAF0;
-  --color-text-muted: #8A90A0;
-  --color-text-subtle: #5A6070;
+  /* ——— Color: Light (default) ——— */
+  --color-bg: #F7F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F0F2F6;
+  --color-surface-3: #E6E9EF;
+  --color-border: rgba(17, 19, 24, 0.10);
+  --color-border-strong: rgba(17, 19, 24, 0.18);
+  --color-text: #111318;
+  --color-text-muted: #4A5060;
+  --color-text-subtle: #555B6A;
 
-  --color-accent: #1B8FFF;
-  --color-accent-hover: #3FA2FF;
-  --color-accent-press: #0F7AE0;
-  --color-accent-alt: #00A85E;
-  --color-success: #028c53;
-  --color-warning: #ca5900;
-  --color-error: #a00400;
+  --color-accent: #0070E0;
+  --color-accent-hover: #0A5FBF;
+  --color-accent-press: #084C99;
+  --color-accent-alt: #00723F;
+  --color-success: #00723F;
+  --color-warning: #9C4B00;
+  --color-error: #BD1C1C;
 
   --color-azulejo: #1E4A8F;
-  --color-azulejo-soft: rgba(30, 74, 143, 0.18);
+  --color-azulejo-soft: rgba(30, 74, 143, 0.10);
 
   /* ——— Typography ——— */
   --font-display: #{$font-display};
@@ -90,56 +90,26 @@
   --content-max: 72ch;
 }
 
-[data-theme="light"] {
-  --color-bg: #F7F8FA;
-  --color-surface: #FFFFFF;
-  --color-surface-2: #F0F2F6;
-  --color-surface-3: #E6E9EF;
-  --color-border: rgba(17, 19, 24, 0.10);
-  --color-border-strong: rgba(17, 19, 24, 0.18);
-  --color-text: #111318;
-  --color-text-muted: #5A6070;
-  --color-text-subtle: #8A90A0;
+[data-theme="dark"] {
+  --color-bg: #0D0F12;
+  --color-surface: #161A20;
+  --color-surface-2: #1E2330;
+  --color-surface-3: #252B3B;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+  --color-text: #E8EAF0;
+  --color-text-muted: #A1A8BA;
+  --color-text-subtle: #8C94A6;
 
-  --color-accent: #0070E0;
-  --color-accent-hover: #0A5FBF;
-  --color-accent-press: #084C99;
-  --color-accent-alt: #00A85E;
-  --color-azulejo: #1E4A8F;
-  --color-azulejo-soft: rgba(30, 74, 143, 0.10);
-}
-
-// [data-accent="verde"] {
-//   --color-accent: #00A85E;
-//   --color-accent-hover: #00C470;
-//   --color-accent-press: #008F4E;
-// }
-// [data-accent="azulejo"] {
-//   --color-accent: #1E4A8F;
-//   --color-accent-hover: #2E5FA8;
-//   --color-accent-press: #163A72;
-// }
-// [data-accent="laranja"] {
-//   --color-accent: #E87B2E;
-//   --color-accent-hover: #F28E45;
-//   --color-accent-press: #C7661D;
-// }
-
-[data-radius="sharp"] {
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 10px;
-}
-[data-radius="round"] {
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-}
-
-[data-density="compact"] {
-  --density-scale: 0.82;
+  --color-accent: #389BFF;
+  --color-accent-hover: #6BB5FF;
+  --color-accent-press: #0076EE;
+  --color-accent-alt: #00D06C;
+  --color-success: #00D06C;
+  --color-warning: #FF9100;
+  --color-error: #FF5252;
+  --color-azulejo: #7CA7F5;
+  --color-azulejo-soft: rgba(124, 167, 245, 0.18);
 }
 
 * {
@@ -256,4 +226,96 @@ hr {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ——— Acessibilidade: Escala de Texto ——— */
+html[data-text-scale="115"] {
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: 18px;
+  --text-lg: 21px;
+  --text-xl: 25px;
+  --text-2xl: 31px;
+  --text-3xl: 38px;
+  --text-4xl: 46px;
+  --text-5xl: 62px;
+}
+html[data-text-scale="130"] {
+  --text-xs: 15.6px;
+  --text-sm: 18.2px;
+  --text-base: 20.8px;
+  --text-lg: 24.7px;
+  --text-xl: 29.9px;
+  --text-2xl: 36.4px;
+  --text-3xl: 44.2px;
+  --text-4xl: 53.3px;
+  --text-5xl: 72.8px;
+}
+html[data-text-scale="150"] {
+  --text-xs: 18px;
+  --text-sm: 21px;
+  --text-base: 24px;
+  --text-lg: 28.5px;
+  --text-xl: 34.5px;
+  --text-2xl: 42px;
+  --text-3xl: 51px;
+  --text-4xl: 61.5px;
+  --text-5xl: 84px;
+}
+
+/* ——— Acessibilidade: Espaçamento de Linha ——— */
+html[data-line-spacing="relaxed"] {
+  --leading-relaxed: 1.85;
+  --leading-normal: 1.75;
+}
+html[data-line-spacing="double"] {
+  --leading-relaxed: 2.2;
+  --leading-normal: 2.0;
+}
+
+/* ——— Acessibilidade: Fonte para Dislexia ——— */
+html[data-dyslexia="true"] {
+  --font-body: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  --font-display: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+}
+
+/* ——— Botão Flutuante de Acessibilidade ——— */
+.floating-accessibility-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  width: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 998;
+  transition: all var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    background: var(--color-accent-hover);
+    width: 48px;
+  }
+
+  &:focus-visible {
+    @include focus-visible-style;
+    outline-offset: -3px;
+  }
+}
+
+/* Ajustar posicionamento do VLibras para baixo para não sobrepor o nosso botão de acessibilidade */
+[vw] {
+  top: auto !important;
+  bottom: 20px !important;
+}
+
+[vw] [vw-access-button] {
+  top: auto !important;
+  bottom: 0 !important;
 }

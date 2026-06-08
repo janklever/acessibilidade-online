@@ -18,15 +18,19 @@
 }
 .btn-primary {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-bg);
   &:hover {
     background: var(--color-accent-hover);
-    color: #fff;
+    color: var(--color-bg);
     transform: translateY(-1px);
   }
   &:active {
     transform: translateY(0);
     background: var(--color-accent-press);
+  }
+  [data-theme="light"] & {
+    color: #fff;
+    &:hover { color: #fff; }
   }
 }
 

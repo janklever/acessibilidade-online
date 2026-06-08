@@ -1,6 +1,8 @@
 {
   "name": "Acessibilidade Online",
   "short_name": "A11y",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/assets/web-app-manifest-192x192.png",

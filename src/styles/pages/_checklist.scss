@@ -129,8 +129,12 @@
   &:hover { color: var(--color-text); border-color: var(--color-border-strong); }
   &.is-active {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-bg);
     border-color: var(--color-accent);
+
+    [data-theme="light"] & {
+      color: #fff;
+    }
   }
 }
 

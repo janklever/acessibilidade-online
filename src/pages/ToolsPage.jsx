@@ -56,11 +56,11 @@ export function ToolsPage({ setRoute, accent }) {
           <ToolCard
             num="03"
             title="Simulador"
-            tag="Daltonismo · baixa visão · foco"
+            tag="Visão · motora · cognitiva · áudio"
             status={{ label: 'Disponível', kind: 'success' }}
-            desc="Simula em tempo real como pessoas com diferentes condições visuais ou cognitivas percebem sua interface (protanopia, deuteranopia, tritanopia, catarata, glaucoma, etc.)."
+            desc="Simula em tempo real condições visuais, cognitivas, motoras e de leitura na interface (como daltonismo, catarata, dislexia, tremores musculares e leitor de tela)."
             stats={[
-              { k: 'Condições', v: '8' },
+              { k: 'Condições', v: '10' },
               { k: 'Teclado', v: '100%' },
               { k: 'Suportes', v: 'Imagem / URL / Form' },
             ]}
@@ -100,7 +100,7 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
         </span>
       </div>
 
-      <div className="tool-icon" aria-hidden="true">
+      {/* <div className="tool-icon" aria-hidden="true">
         <svg width="52" height="52" viewBox="0 0 60 60" fill="none">
           <path d="M30 4 L52 17 L52 43 L30 56 L8 43 L8 17 Z"
             stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.5" />
@@ -130,10 +130,10 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
             </>
           )}
         </svg>
-      </div>
+      </div> */}
 
       <div className="tool-body">
-        <h3 className="tool-title">{title}</h3>
+        <h2 className="tool-title">{title}</h2>
         <p className="tool-tag mono">{tag}</p>
         <p className="tool-desc">{desc}</p>
       </div>

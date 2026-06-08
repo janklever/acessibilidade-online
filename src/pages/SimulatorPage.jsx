@@ -74,6 +74,22 @@ const CONDITIONS = [
     pct: 'Cognitivo',
     desc: 'Dificuldade de concentração visual; ajuda a destacar elementos sob foco ativo.',
     info: 'Simulação cognitiva baseada em Spotlight. O entorno é escurecido e desfocado, mantendo nítido apenas o elemento focado por teclado ou mouse, evidenciando a importância do indicador de foco.'
+  },
+  {
+    id: 'dislexia',
+    name: 'Dislexia',
+    k: 'Cognitivo / Leitura',
+    pct: '4–5% da pop.',
+    desc: 'Dificuldade de decodificação de letras; simula palavras embaralhando dinamicamente.',
+    info: 'Dificuldade crônica de leitura e soletração. Usuários com dislexia beneficiam-se de fontes sem serifa limpas, espaçamento adequado e textos alinhados à esquerda (evitando justificado).'
+  },
+  {
+    id: 'tremor',
+    name: 'Tremores (Parkinson)',
+    k: 'Motor / Física',
+    pct: '1% acima de 60',
+    desc: 'Dificuldade de controle estável do mouse devido a tremores involuntários.',
+    info: 'Usuários com Parkinson ou tremores essenciais têm extrema dificuldade em focar e clicar em botões pequenos ou links próximos. Elementos interativos devem ter tamanho mínimo de 44x44px.'
   }
 ];
 
@@ -97,6 +113,7 @@ export function SimulatorPage({ setRoute }) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [accessibleMode, setAccessibleMode] = useState(false);
+  const [screenReaderEnabled, setScreenReaderEnabled] = useState(false);
 
   const viewportRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -155,6 +172,153 @@ export function SimulatorPage({ setRoute }) {
       }
     };
   }, [selectedCondition, activeTab]);
+
+  // Dyslexia simulation effect
+  useEffect(() => {
+    if (selectedCondition !== 'dislexia') return;
+
+    const originalTexts = new WeakMap();
+    let intervalId;
+
+    const scrambleText = (text) => {
+      // Matches standard words and accented Portuguese characters
+      return text.replace(/[a-zA-Z\u00C0-\u00FF]+/g, (word) => {
+        if (word.length <= 3) return word;
+        const first = word[0];
+        const last = word[word.length - 1];
+        const middle = word.slice(1, -1).split('');
+        for (let i = 0; i < middle.length - 1; i++) {
+          if (Math.random() < 0.4) {
+            const tmp = middle[i];
+            middle[i] = middle[i + 1];
+            middle[i + 1] = tmp;
+          }
+        }
+        return first + middle.join('') + last;
+      });
+    };
+
+    const runSimulation = () => {
+      const container = viewportRef.current;
+      if (!container) return;
+
+      const textNodes = [];
+      const getTextNodes = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (node.nodeValue.trim().length > 0) {
+            textNodes.push(node);
+          }
+        } else {
+          const tag = node.nodeName.toLowerCase();
+          if (tag !== 'script' && tag !== 'style' && tag !== 'svg' && tag !== 'iframe' && tag !== 'input' && tag !== 'textarea') {
+            for (let child of node.childNodes) {
+              getTextNodes(child);
+            }
+          }
+        }
+      };
+
+      getTextNodes(container);
+
+      textNodes.forEach(node => {
+        let orig = originalTexts.get(node);
+        if (orig === undefined) {
+          orig = node.nodeValue;
+          originalTexts.set(node, orig);
+        }
+        node.nodeValue = scrambleText(orig);
+      });
+    };
+
+    // Run immediately, then at interval
+    runSimulation();
+    intervalId = setInterval(runSimulation, 1200);
+
+    return () => {
+      clearInterval(intervalId);
+      // Restore original text
+      const container = viewportRef.current;
+      if (!container) return;
+
+      const textNodes = [];
+      const getTextNodes = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          textNodes.push(node);
+        } else {
+          const tag = node.nodeName.toLowerCase();
+          if (tag !== 'script' && tag !== 'style' && tag !== 'svg') {
+            for (let child of node.childNodes) {
+              getTextNodes(child);
+            }
+          }
+        }
+      };
+      getTextNodes(container);
+
+      textNodes.forEach(node => {
+        const orig = originalTexts.get(node);
+        if (orig !== undefined) {
+          node.nodeValue = orig;
+        }
+      });
+    };
+  }, [selectedCondition, activeTab, accessibleMode, formSubmitted, formErrors]);
+
+  // Simulated Screen Reader (SpeechSynthesis) effect
+  useEffect(() => {
+    if (!screenReaderEnabled) {
+      window.speechSynthesis?.cancel();
+      return;
+    }
+
+    const container = viewportRef.current;
+    if (!container) return;
+
+    const handleFocusIn = (e) => {
+      const target = e.target;
+      if (!target) return;
+
+      const tag = target.tagName.toLowerCase();
+      let textToSpeak = '';
+
+      if (tag === 'input') {
+        const type = target.type || 'text';
+        let labelText = '';
+        if (target.id) {
+          const labelNode = container.querySelector(`label[for="${target.id}"]`);
+          if (labelNode) labelText = labelNode.innerText;
+        }
+        if (!labelText && target.ariaLabel) {
+          labelText = target.ariaLabel;
+        }
+        
+        if (type === 'checkbox') {
+          textToSpeak = `Caixa de seleção, ${labelText || 'Opção'}. ${target.checked ? 'Selecionado' : 'Não selecionado'}.`;
+        } else {
+          const placeholder = target.placeholder ? `, exemplo: ${target.placeholder}` : '';
+          const value = target.value ? `, valor: ${target.value}` : '';
+          textToSpeak = `Campo de texto, ${labelText || 'Entrada'}${placeholder}${value}.`;
+        }
+      } else if (tag === 'button') {
+        textToSpeak = `Botão, ${target.innerText}.`;
+      } else if (tag === 'a') {
+        textToSpeak = `Link, ${target.innerText || target.ariaLabel || 'ir para página'}.`;
+      }
+
+      if (textToSpeak && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'pt-BR';
+        window.speechSynthesis.speak(utterance);
+      }
+    };
+
+    container.addEventListener('focusin', handleFocusIn);
+    return () => {
+      container.removeEventListener('focusin', handleFocusIn);
+      window.speechSynthesis?.cancel();
+    };
+  }, [screenReaderEnabled]);
 
   // Image upload handling
   const handleImageUpload = (e) => {
@@ -270,7 +434,7 @@ export function SimulatorPage({ setRoute }) {
         <div className="sim-container">
           {/* Sidebar Controls */}
           <aside className="sim-controls-sidebar">
-            <h3>Escolha um dos filtros:</h3>
+            <h2>Escolha um dos filtros:</h2>
 
             <nav className="sim-list" aria-label="Condições visuais para simulação">
               {CONDITIONS.map((c) => (
@@ -347,16 +511,30 @@ export function SimulatorPage({ setRoute }) {
                       <h4>Playground de componentes</h4>
                       <p>Use os controles abaixo para interagir com elementos simulando foco de teclado e mouse.</p>
 
-                      <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <input
-                          type="checkbox"
-                          id="acc-mode"
-                          checked={accessibleMode}
-                          onChange={(e) => setAccessibleMode(e.target.checked)}
-                        />
-                        <label htmlFor="acc-mode" style={{ fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
-                          Ativar padrão de acessibilidade extra (legenda/ícone de erro)
-                        </label>
+                      <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <input
+                            type="checkbox"
+                            id="acc-mode"
+                            checked={accessibleMode}
+                            onChange={(e) => setAccessibleMode(e.target.checked)}
+                          />
+                          <label htmlFor="acc-mode" style={{ fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                            Ativar padrão de acessibilidade extra (legenda/ícone de erro)
+                          </label>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <input
+                            type="checkbox"
+                            id="screen-reader-mode"
+                            checked={screenReaderEnabled}
+                            onChange={(e) => setScreenReaderEnabled(e.target.checked)}
+                          />
+                          <label htmlFor="screen-reader-mode" style={{ fontSize: '0.85rem', cursor: 'pointer', fontWeight: 600 }}>
+                            🔊 Ativar leitor de tela simulado (ouvir foco ao navegar)
+                          </label>
+                        </div>
                       </div>
                     </div>
 
@@ -436,21 +614,21 @@ export function SimulatorPage({ setRoute }) {
                         <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
                           <div style={{ flex: 1, padding: '12px', background: '#f8fafc', borderRadius: '4px', textAlign: 'center' }}>
                             <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Taxa de falhas</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#ef4444', margin: '4px 0' }}>14%</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#cc2b2b', margin: '4px 0' }}>14%</div>
                             <div style={{
                               height: '8px',
-                              background: '#ef4444',
+                              background: '#cc2b2b',
                               borderRadius: '4px',
                               backgroundImage: accessibleMode ? 'repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.4) 5px, rgba(255,255,255,0.4) 10px)' : 'none'
                             }} />
-                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#dc2626', fontWeight: 600 }}>Atenção / Crítico</span>}
+                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#a51d1d', fontWeight: 600 }}>Atenção / Crítico</span>}
                           </div>
 
                           <div style={{ flex: 1, padding: '12px', background: '#f8fafc', borderRadius: '4px', textAlign: 'center' }}>
                             <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Taxa de sucesso</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981', margin: '4px 0' }}>86%</div>
-                            <div style={{ height: '8px', background: '#10b981', borderRadius: '4px' }} />
-                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>Normal / Seguro</span>}
+                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#09815c', margin: '4px 0' }}>86%</div>
+                            <div style={{ height: '8px', background: '#09815c', borderRadius: '4px' }} />
+                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#05694b', fontWeight: 600 }}>Normal / Seguro</span>}
                           </div>
                         </div>
 
@@ -466,7 +644,7 @@ export function SimulatorPage({ setRoute }) {
                         <h5 className="playground-title">Legibilidade e contraste de texto</h5>
                         <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#334155' }}>
                           Esta caixa simula leitura. Fontes com espessura fina (thin/light) ou contraste inadequado como
-                          <span style={{ color: '#94a3b8', margin: '0 4px', fontWeight: 300 }}> texto cinza claro </span>
+                          <span style={{ color: '#475569', margin: '0 4px', fontWeight: 300 }}> texto cinza claro </span>
                           ficam ilegíveis sob filtros de Catarata e Baixa Acuidade.
                         </p>
                         <div className="playground-alert alert-info">

@@ -67,7 +67,7 @@
     box-shadow: 0 0 0 2px rgba(27, 143, 255, 0.2);
 
     .sim-btn-name {
-      color: var(--color-accent);
+      color: var(--color-text);
       font-weight: 600;
     }
   }
@@ -225,6 +225,25 @@
   &.sim-apply-baixa-acuidade {
     filter: blur(6px) contrast(0.9);
   }
+  
+  &.sim-apply-tremor {
+    .pg-btn, input, a, button, [role="button"], label {
+      transition: none !important;
+      
+      &:hover, &:focus, &:focus-within {
+        animation: tremor-shake 0.18s infinite linear;
+      }
+    }
+  }
+}
+
+@keyframes tremor-shake {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, 3px); }
+  80% { transform: translate(3px, 1px); }
+  100% { transform: translate(0, 0); }
 }
 
 /* Custom Overlays for Glaucoma and Spotlight (Foco Reduzido) */
@@ -342,7 +361,7 @@
 
     .form-error {
       font-size: 0.75rem;
-      color: #ef4444;
+      color: #d32f2f;
       font-weight: 500;
       margin-top: 2px;
     }
@@ -387,15 +406,15 @@
     }
 
     &.btn-success {
-      background: #10b981;
+      background: #09815c;
       color: #ffffff;
-      &:hover { background: #059669; }
+      &:hover { background: #05694b; }
     }
 
     &.btn-danger {
-      background: #ef4444;
+      background: #cc2b2b;
       color: #ffffff;
-      &:hover { background: #dc2626; }
+      &:hover { background: #a51d1d; }
     }
 
     &.btn-warning {

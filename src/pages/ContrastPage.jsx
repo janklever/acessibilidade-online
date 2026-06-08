@@ -13,6 +13,8 @@ export function ContrastPage({ setRoute }) {
   const ratio = APCAtool.wcag(fg, bg);
   const apcaLv = APCAtool.apcaLevel(lc);
   const wcagLv = APCAtool.wcagLevel(ratio);
+  const bgRgb = APCAtool.hexToRgb(bg);
+  const bgLum = APCAtool.relLuminance(bgRgb);
 
   // Suggestor — iterate toward a nearest-passing foreground
   const suggest = React.useMemo(() => {
@@ -172,7 +174,7 @@ export function ContrastPage({ setRoute }) {
 
             {/* Reference grid */}
             <div className="reference-grid">
-              <h3 className="ref-title">Referência rápida</h3>
+              <h2 className="ref-title">Referência rápida</h2>
               <table className="ref-table">
                 <thead>
                   <tr>
