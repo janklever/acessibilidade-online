@@ -67,7 +67,7 @@
     box-shadow: 0 0 0 2px rgba(27, 143, 255, 0.2);
 
     .sim-btn-name {
-      color: var(--color-accent);
+      color: var(--color-text);
       font-weight: 600;
     }
   }
@@ -361,7 +361,7 @@
 
     .form-error {
       font-size: 0.75rem;
-      color: #ef4444;
+      color: #d32f2f;
       font-weight: 500;
       margin-top: 2px;
     }
