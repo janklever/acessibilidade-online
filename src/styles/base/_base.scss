@@ -110,64 +110,6 @@
   --color-error: #BD1C1C;
   --color-azulejo: #1E4A8F;
   --color-azulejo-soft: rgba(30, 74, 143, 0.10);
-
-  &[data-accent="azul"] {
-    --color-accent: #0070E0;
-    --color-accent-hover: #0A5FBF;
-    --color-accent-press: #084C99;
-  }
-  &[data-accent="verde"] {
-    --color-accent: #00854A;
-    --color-accent-hover: #009E58;
-    --color-accent-press: #006C3C;
-  }
-  &[data-accent="azulejo"] {
-    --color-accent: #1E4A8F;
-    --color-accent-hover: #2E5FA8;
-    --color-accent-press: #163A72;
-  }
-  &[data-accent="laranja"] {
-    --color-accent: #C35100;
-    --color-accent-hover: #E05D00;
-    --color-accent-press: #A34400;
-  }
-}
-[data-accent="azul"] {
-  --color-accent: #389BFF;
-  --color-accent-hover: #6BB5FF;
-  --color-accent-press: #0076EE;
-}
-[data-accent="verde"] {
-  --color-accent: #00D06C;
-  --color-accent-hover: #33DB89;
-  --color-accent-press: #009E52;
-}
-[data-accent="azulejo"] {
-  --color-accent: #7CA7F5;
-  --color-accent-hover: #A3C1F9;
-  --color-accent-press: #5587E2;
-}
-[data-accent="laranja"] {
-  --color-accent: #FF8F3D;
-  --color-accent-hover: #FFA96B;
-  --color-accent-press: #E66F19;
-}
-
-[data-radius="sharp"] {
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 10px;
-}
-[data-radius="round"] {
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-}
-
-[data-density="compact"] {
-  --density-scale: 0.82;
 }
 
 * {
@@ -284,4 +226,96 @@ hr {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ——— Acessibilidade: Escala de Texto ——— */
+html[data-text-scale="115"] {
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: 18px;
+  --text-lg: 21px;
+  --text-xl: 25px;
+  --text-2xl: 31px;
+  --text-3xl: 38px;
+  --text-4xl: 46px;
+  --text-5xl: 62px;
+}
+html[data-text-scale="130"] {
+  --text-xs: 15.6px;
+  --text-sm: 18.2px;
+  --text-base: 20.8px;
+  --text-lg: 24.7px;
+  --text-xl: 29.9px;
+  --text-2xl: 36.4px;
+  --text-3xl: 44.2px;
+  --text-4xl: 53.3px;
+  --text-5xl: 72.8px;
+}
+html[data-text-scale="150"] {
+  --text-xs: 18px;
+  --text-sm: 21px;
+  --text-base: 24px;
+  --text-lg: 28.5px;
+  --text-xl: 34.5px;
+  --text-2xl: 42px;
+  --text-3xl: 51px;
+  --text-4xl: 61.5px;
+  --text-5xl: 84px;
+}
+
+/* ——— Acessibilidade: Espaçamento de Linha ——— */
+html[data-line-spacing="relaxed"] {
+  --leading-relaxed: 1.85;
+  --leading-normal: 1.75;
+}
+html[data-line-spacing="double"] {
+  --leading-relaxed: 2.2;
+  --leading-normal: 2.0;
+}
+
+/* ——— Acessibilidade: Fonte para Dislexia ——— */
+html[data-dyslexia="true"] {
+  --font-body: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  --font-display: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+}
+
+/* ——— Botão Flutuante de Acessibilidade ——— */
+.floating-accessibility-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  width: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 998;
+  transition: all var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    background: var(--color-accent-hover);
+    width: 48px;
+  }
+
+  &:focus-visible {
+    @include focus-visible-style;
+    outline-offset: -3px;
+  }
+}
+
+/* Ajustar posicionamento do VLibras para baixo para não sobrepor o nosso botão de acessibilidade */
+[vw] {
+  top: auto !important;
+  bottom: 20px !important;
+}
+
+[vw] [vw-access-button] {
+  top: auto !important;
+  bottom: 0 !important;
 }

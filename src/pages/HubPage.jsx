@@ -259,7 +259,7 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
         </span>
       </div>
 
-      <div className="tool-icon" aria-hidden="true">
+      {/* <div className="tool-icon" aria-hidden="true">
         <svg width="52" height="52" viewBox="0 0 60 60" fill="none">
           <path d="M30 4 L52 17 L52 43 L30 56 L8 43 L8 17 Z"
             stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.5" />
@@ -289,7 +289,7 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
             </>
           )}
         </svg>
-      </div>
+      </div> */}
 
       <div className="tool-body">
         <h3 className="tool-title">{title}</h3>
