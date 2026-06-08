@@ -59,6 +59,24 @@ export const LEARNING_DATA = [
 
   // Ferramentas
   {
+    id: 'tool-pagespeed',
+    type: 'tool',
+    title: 'PageSpeed Insights',
+    description: 'Ferramenta do Google que analisa o conteúdo de uma página web e gera sugestões para torná-la mais rápida e acessível.',
+    url: 'https://pagespeed.web.dev/',
+    author: 'Google',
+    tags: ['Avaliação', 'Desempenho', 'Auditoria']
+  },
+  {
+    id: 'tool-lighthouse',
+    type: 'tool',
+    title: 'Lighthouse',
+    description: 'Ferramenta automatizada de código aberto do Google para melhorar a qualidade de páginas web, com auditorias integradas de acessibilidade, SEO, melhores práticas e desempenho.',
+    url: 'https://developer.chrome.com/docs/lighthouse/overview/',
+    author: 'Google Developer',
+    tags: ['Auditoria', 'Acessibilidade', 'Desempenho', 'SEO']
+  },
+  {
     id: 'tool-aria',
     type: 'tool',
     title: 'Guia sobre WAI-ARIA',
