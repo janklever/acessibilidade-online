@@ -176,11 +176,11 @@ export function HubPage({ setRoute, heroVariant = 'azulejo', accent, theme }) {
           <ToolCard
             num="03"
             title="Simulador"
-            tag="Daltonismo · baixa visão · foco"
+            tag="Visão · motora · cognitiva · áudio"
             status={{ label: 'Disponível', kind: 'success' }}
-            desc="Simula em tempo real como pessoas com diferentes condições visuais ou cognitivas percebem sua interface (protanopia, deuteranopia, tritanopia, catarata, glaucoma, etc.)."
+            desc="Simula em tempo real condições visuais, cognitivas, motoras e de leitura na interface (como daltonismo, catarata, dislexia, tremores musculares e leitor de tela)."
             stats={[
-              { k: 'Condições', v: '8' },
+              { k: 'Condições', v: '10' },
               { k: 'Teclado', v: '100%' },
               { k: 'Suportes', v: 'Imagem / URL / Form' },
             ]}
