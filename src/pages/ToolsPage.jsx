@@ -133,7 +133,7 @@ function ToolCard({ num, title, tag, desc, stats, status, onClick, disabled, acc
       </div>
 
       <div className="tool-body">
-        <h3 className="tool-title">{title}</h3>
+        <h2 className="tool-title">{title}</h2>
         <p className="tool-tag mono">{tag}</p>
         <p className="tool-desc">{desc}</p>
       </div>

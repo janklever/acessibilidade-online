@@ -194,7 +194,6 @@ export function ReferencesPage({ setRoute }) {
                     className={`references-card card-${resource.type}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${typeInfo.label}: ${resource.title}. Autor: ${resource.author}. Abre em uma nova aba.`}
                   >
                     <div className="card-header-meta">
                       <span className={`resource-type-badge ${typeInfo.className}`}>

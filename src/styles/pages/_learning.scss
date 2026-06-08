@@ -113,7 +113,11 @@
   &.is-active {
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: #ffffff;
+    color: var(--color-bg);
+
+    [data-theme="light"] & {
+      color: #ffffff;
+    }
   }
 }
 
@@ -216,7 +220,11 @@
 
   &.type-doc {
     background: rgba(142, 68, 173, 0.1);
-    color: #a55eea;
+    color: #b882f8;
+
+    [data-theme="light"] & {
+      color: #7d3c98;
+    }
   }
 
   &.type-reference {

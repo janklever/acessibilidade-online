@@ -270,7 +270,7 @@ export function SimulatorPage({ setRoute }) {
         <div className="sim-container">
           {/* Sidebar Controls */}
           <aside className="sim-controls-sidebar">
-            <h3>Escolha um dos filtros:</h3>
+            <h2>Escolha um dos filtros:</h2>
 
             <nav className="sim-list" aria-label="Condições visuais para simulação">
               {CONDITIONS.map((c) => (
@@ -436,21 +436,21 @@ export function SimulatorPage({ setRoute }) {
                         <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
                           <div style={{ flex: 1, padding: '12px', background: '#f8fafc', borderRadius: '4px', textAlign: 'center' }}>
                             <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Taxa de falhas</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#ef4444', margin: '4px 0' }}>14%</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#cc2b2b', margin: '4px 0' }}>14%</div>
                             <div style={{
                               height: '8px',
-                              background: '#ef4444',
+                              background: '#cc2b2b',
                               borderRadius: '4px',
                               backgroundImage: accessibleMode ? 'repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.4) 5px, rgba(255,255,255,0.4) 10px)' : 'none'
                             }} />
-                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#dc2626', fontWeight: 600 }}>Atenção / Crítico</span>}
+                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#a51d1d', fontWeight: 600 }}>Atenção / Crítico</span>}
                           </div>
 
                           <div style={{ flex: 1, padding: '12px', background: '#f8fafc', borderRadius: '4px', textAlign: 'center' }}>
                             <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Taxa de sucesso</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981', margin: '4px 0' }}>86%</div>
-                            <div style={{ height: '8px', background: '#10b981', borderRadius: '4px' }} />
-                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>Normal / Seguro</span>}
+                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#09815c', margin: '4px 0' }}>86%</div>
+                            <div style={{ height: '8px', background: '#09815c', borderRadius: '4px' }} />
+                            {accessibleMode && <span style={{ fontSize: '0.7rem', color: '#05694b', fontWeight: 600 }}>Normal / Seguro</span>}
                           </div>
                         </div>
 
@@ -466,7 +466,7 @@ export function SimulatorPage({ setRoute }) {
                         <h5 className="playground-title">Legibilidade e contraste de texto</h5>
                         <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#334155' }}>
                           Esta caixa simula leitura. Fontes com espessura fina (thin/light) ou contraste inadequado como
-                          <span style={{ color: '#94a3b8', margin: '0 4px', fontWeight: 300 }}> texto cinza claro </span>
+                          <span style={{ color: '#475569', margin: '0 4px', fontWeight: 300 }}> texto cinza claro </span>
                           ficam ilegíveis sob filtros de Catarata e Baixa Acuidade.
                         </p>
                         <div className="playground-alert alert-info">

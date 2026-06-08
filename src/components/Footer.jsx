@@ -54,19 +54,17 @@ export function SiteFooter({ setRoute }) {
 
         <div className="footer-cols">
           <div className="footer-col">
-            <h4 className="footer-col-title">Projeto</h4>
+            <p className="footer-col-title">Projeto</p>
             <ul>
               <li><a href="/sobre" onClick={(e) => { e.preventDefault(); setRoute('sobre'); }}>Sobre</a></li>
               <li><a href="/ferramentas" onClick={(e) => { e.preventDefault(); setRoute('ferramentas'); }}>Ferramentas</a></li>
               <li><a href="/referencias" onClick={(e) => { e.preventDefault(); setRoute('referencias'); }}>Referências</a></li>
               <li><a href="/privacidade" onClick={(e) => { e.preventDefault(); setRoute('privacidade'); }}>Privacidade</a></li>
               <li><button onClick={(e) => { e.preventDefault(); if (window.openCookieConsent) window.openCookieConsent(e.currentTarget); }}>Cookies</button></li>
-              {/* <li><a href="https://github.com/janklever/acessibilidade-online/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Como contribuir <ArrowOutwardIcon /></a></li>
-              <li><a href="https://github.com/janklever/acessibilidade-online" target="_blank" rel="noopener noreferrer">Código-fonte <ArrowOutwardIcon /></a></li> */}
             </ul>
           </div>
           <div className="footer-col">
-            <h4 className="footer-col-title">Ferramentas</h4>
+            <p className="footer-col-title">Ferramentas</p>
             <ul>
               <li><a href="/ferramentas/checklist" onClick={(e) => { e.preventDefault(); setRoute('ferramentas/checklist'); }}>Checklist</a></li>
               <li><a href="/ferramentas/contraste" onClick={(e) => { e.preventDefault(); setRoute('ferramentas/contraste'); }}>Contraste</a></li>
@@ -75,7 +73,7 @@ export function SiteFooter({ setRoute }) {
             </ul>
           </div>
           <div className="footer-col">
-            <h4 className="footer-col-title">Referências</h4>
+            <p className="footer-col-title">Referências</p>
             <ul>
               <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm" target="_blank" rel="noopener noreferrer">LBI (Lei 13.146/2015) <ArrowOutwardIcon /></a></li>
               <li><a href="https://emag.governoeletronico.gov.br/" target="_blank" rel="noopener noreferrer">eMAG 3.1 <ArrowOutwardIcon /></a></li>
