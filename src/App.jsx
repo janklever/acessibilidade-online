@@ -11,6 +11,7 @@ import { EvaluatorPage } from './pages/EvaluatorPage';
 import { ToolsPage } from './pages/ToolsPage';
 import './styles/main.scss';
 import { CookieConsent } from './components/CookieConsent';
+import { updateCanonicalUrl } from './utils/seo';
 
 const TWEAK_DEFAULTS = {
   "theme": "auto",
@@ -54,6 +55,10 @@ export default function App() {
     window.history.pushState({}, '', path);
     window.scrollTo({ top: 0, behavior: 'auto' });
   };
+
+  React.useEffect(() => {
+    updateCanonicalUrl(route);
+  }, [route]);
 
   // Tweaks state
   const [tweaks, setTweaks] = React.useState(() => {
