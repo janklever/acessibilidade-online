@@ -36,6 +36,33 @@ export const LEARNING_DATA = [
     author: 'Governo Federal do Brasil',
     tags: ['Imagens', 'Acessibilidade', 'Brasil', 'Tutorial']
   },
+  {
+    id: 'art-webaim-million-2025',
+    type: 'article',
+    title: 'WebAIM Million 2025',
+    description: 'Relatório anual mais citado do setor, analisando a acessibilidade de 1 milhão das páginas iniciais mais acessadas da web. Mostra que 94,8% das páginas têm falhas WCAG 2 detectáveis, com contraste baixo, imagens sem texto alternativo e formulários sem rótulo entre os erros mais comuns.',
+    url: 'https://webaim.org/projects/million/2025',
+    author: 'WebAIM',
+    tags: ['Dados', 'Pesquisa', 'WCAG', 'Estatísticas']
+  },
+  {
+    id: 'art-webaim-screen-reader-survey',
+    type: 'article',
+    title: 'Pesquisa de Usuários de Leitores de Tela #10',
+    description: 'Levantamento sobre preferências reais de pessoas que utilizam leitores de tela como JAWS, NVDA e VoiceOver, útil para embasar decisões de design com dados de uso real, não apenas teoria de WCAG.',
+    url: 'https://webaim.org/projects/screenreadersurvey10/',
+    author: 'WebAIM',
+    tags: ['Dados', 'Pesquisa', 'Leitores de Tela']
+  },
+  {
+    id: 'art-wcag3-contrast-roselli',
+    type: 'article',
+    title: 'WCAG3 Contrast as of April 2026',
+    description: 'Análise técnica e crítica sobre como o contraste está sendo tratado no WCAG 3 e no algoritmo APCA, escrita por uma referência respeitada da comunidade de acessibilidade. Bom contraponto analítico ao verificador de contraste do site.',
+    url: 'https://adrianroselli.com/2026/04/wcag3-contrast-as-of-april-2026.html',
+    author: 'Adrian Roselli',
+    tags: ['Avançado', 'Contraste', 'APCA', 'WCAG 3']
+  },
 
   // Livros
   {
@@ -130,6 +157,33 @@ export const LEARNING_DATA = [
     author: 'WebAIM',
     tags: ['Avaliação', 'Extensão', 'Erros']
   },
+  {
+    id: 'tool-contrast-tools',
+    type: 'tool',
+    title: 'contrast.tools',
+    description: 'Ferramenta que compara contraste no modelo tradicional (WCAG 2) e no novo modelo preditivo (APCA/WCAG 3) lado a lado, complementando o verificador de contraste do site.',
+    url: 'https://contrast.tools/?tab=apca',
+    author: 'Contrast Tools',
+    tags: ['Contraste', 'APCA', 'WCAG 3']
+  },
+  {
+    id: 'tool-a11y-project',
+    type: 'tool',
+    title: 'The A11Y Project',
+    description: 'Comunidade e checklist open-source mantido coletivamente, com um ponto de partida enxuto e muito usado para práticas de acessibilidade web.',
+    url: 'https://www.a11yproject.com/',
+    author: 'The A11Y Project',
+    tags: ['Checklist', 'Comunidade', 'Open Source']
+  },
+  {
+    id: 'tool-axe-devtools',
+    type: 'tool',
+    title: 'Deque axe DevTools',
+    description: 'Referência de mercado para testes automatizados de acessibilidade, cobrindo checagens automatizadas de código e DOM que complementam auditorias manuais.',
+    url: 'https://www.deque.com/axe/devtools/',
+    author: 'Deque Systems',
+    tags: ['Auditoria', 'Automação', 'Testes']
+  },
 
   // Documentação
   {
@@ -140,6 +194,24 @@ export const LEARNING_DATA = [
     url: 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm',
     author: 'Governo Federal do Brasil',
     tags: ['Legislação', 'Direitos', 'Brasil']
+  },
+  {
+    id: 'doc-abnt-nbr-17225',
+    type: 'doc',
+    title: 'ABNT NBR 17225:2025 — Acessibilidade Digital para Web',
+    description: 'Primeira norma técnica brasileira dedicada à acessibilidade digital, lançada com apoio do Governo Federal. Define 146 itens de verificação — 96 obrigatórios e 50 recomendados — organizados em 16 seções temáticas como teclado, imagens, formulários, cores e semântica.',
+    url: 'https://www2.camara.leg.br/a-camara/estruturaadm/gestao-na-camara-dos-deputados/responsabilidade-social-e-ambiental/acessibilidade/pdfs/ABNTNBR17225AcessibilidadeDigitalparaWeb.pdf',
+    author: 'ABNT',
+    tags: ['Padrão Oficial', 'Brasil', 'Norma Técnica']
+  },
+  {
+    id: 'doc-eaa',
+    type: 'doc',
+    title: 'European Accessibility Act (EAA)',
+    description: 'Legislação europeia de acessibilidade digital, com fiscalização em vigor desde junho de 2025. Referência importante para times brasileiros que atendem clientes ou mercados europeus e precisam se alinhar à WCAG 2.1 AA.',
+    url: 'https://www.pivotalaccessibility.com/2025/09/eaa-enforcement-in-europe-following-the-june-2025-deadline/',
+    author: 'União Europeia',
+    tags: ['Legislação', 'Europa', 'Conformidade']
   },
   {
     id: 'doc-emag',
@@ -158,6 +230,15 @@ export const LEARNING_DATA = [
     url: 'https://www.w3.org/TR/WCAG22/',
     author: 'W3C WAI',
     tags: ['Padrão Oficial', 'Internacional', 'WCAG']
+  },
+  {
+    id: 'doc-wcag3-draft',
+    type: 'doc',
+    title: 'WCAG 3.0 (Working Draft)',
+    description: 'Rascunho da próxima geração das diretrizes de acessibilidade do W3C, com os "outcomes" evoluindo para "requirements". Ainda não substitui a WCAG 2.x, mas indica os rumos futuros dos padrões, com o APCA como peça central dessa evolução.',
+    url: 'https://www.w3.org/WAI/news/2026-03-03/wcag3',
+    author: 'W3C WAI',
+    tags: ['Padrão Oficial', 'Futuro', 'WCAG 3']
   },
   {
     id: 'doc-aria-apg',
