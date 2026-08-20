@@ -158,15 +158,6 @@ export const LEARNING_DATA = [
     tags: ['Avaliação', 'Extensão', 'Erros']
   },
   {
-    id: 'tool-contrast-tools',
-    type: 'tool',
-    title: 'contrast.tools',
-    description: 'Ferramenta que compara contraste no modelo tradicional (WCAG 2) e no novo modelo preditivo (APCA/WCAG 3) lado a lado, complementando o verificador de contraste do site.',
-    url: 'https://contrast.tools/?tab=apca',
-    author: 'Contrast Tools',
-    tags: ['Contraste', 'APCA', 'WCAG 3']
-  },
-  {
     id: 'tool-a11y-project',
     type: 'tool',
     title: 'The A11Y Project',
