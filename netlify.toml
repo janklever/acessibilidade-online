@@ -2,6 +2,32 @@
   publish = "dist"
   command = "npm run build"
 
+# Legacy top-level tool routes moved under /ferramentas/* — 301 so search
+# engines drop the old URLs instead of re-crawling a soft-200 SPA shell.
+[[redirects]]
+  from = "/checklist"
+  to = "/ferramentas/checklist"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contraste"
+  to = "/ferramentas/contraste"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/simulador"
+  to = "/ferramentas/simulador"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/avaliador"
+  to = "/ferramentas/avaliador"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

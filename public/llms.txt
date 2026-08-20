@@ -5,7 +5,10 @@ Hub brasileiro de acessibilidade digital contendo checklist auditável, verifica
 ## Links
 
 - [Home](https://acessibilidade.online/)
-- [Checklist](https://acessibilidade.online/checklist)
-- [Contraste APCA](https://acessibilidade.online/contraste)
-- [Simulador de Visão](https://acessibilidade.online/simulador)
+- [Ferramentas](https://acessibilidade.online/ferramentas)
+- [Checklist](https://acessibilidade.online/ferramentas/checklist)
+- [Contraste APCA](https://acessibilidade.online/ferramentas/contraste)
+- [Simulador de Visão](https://acessibilidade.online/ferramentas/simulador)
+- [Avaliador](https://acessibilidade.online/ferramentas/avaliador)
+- [Referências](https://acessibilidade.online/referencias)
 - [Sobre](https://acessibilidade.online/sobre)
